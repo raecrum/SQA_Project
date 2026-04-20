@@ -1,0 +1,72 @@
+[
+  {
+    "test_case_id": "TC-001",
+    "requirement_id": "REQ-117.130-001A",
+    "description": "Verify that conduct hazard analysis",
+    "input_data": "Sample input data for REQ-117.130-001A",
+    "expected_output": "System correctly performs: Conduct hazard analysis"
+  },
+  {
+    "test_case_id": "TC-002",
+    "requirement_id": "REQ-117.130-001B",
+    "description": "Verify that identify known hazards",
+    "input_data": "Sample input data for REQ-117.130-001B",
+    "expected_output": "System correctly performs: Identify known hazards"
+  },
+  {
+    "test_case_id": "TC-003",
+    "requirement_id": "REQ-117.130-001E",
+    "description": "Verify that determine hazards requiring preventive controls",
+    "input_data": "Sample input data for REQ-117.130-001E",
+    "expected_output": "System correctly performs: Determine hazards requiring preventive controls"
+  },
+  {
+    "test_case_id": "TC-004",
+    "requirement_id": "REQ-117.130-001F",
+    "description": "Verify that hazard analysis must be written",
+    "input_data": "Sample input data for REQ-117.130-001F",
+    "expected_output": "System correctly performs: Hazard analysis must be written"
+  },
+  {
+    "test_case_id": "TC-005",
+    "requirement_id": "REQ-117.130-002A",
+    "description": "Verify that biological hazards",
+    "input_data": "Sample input data for REQ-117.130-002A",
+    "expected_output": "System correctly performs: Biological hazards"
+  },
+  {
+    "test_case_id": "TC-006",
+    "requirement_id": "REQ-117.130-002B",
+    "description": "Verify that chemical hazards",
+    "input_data": "Sample input data for REQ-117.130-002B",
+    "expected_output": "System correctly performs: Chemical hazards"
+  },
+  {
+    "test_case_id": "TC-007",
+    "requirement_id": "REQ-117.130-003A",
+    "description": "Verify that evaluate identified hazards",
+    "input_data": "Sample input data for REQ-117.130-003A",
+    "expected_output": "System correctly performs: Evaluate identified hazards"
+  },
+  {
+    "test_case_id": "TC-008",
+    "requirement_id": "REQ-117.130-003A1",
+    "description": "Verify that assess severity and probability of hazard occurrence",
+    "input_data": "Sample input data for REQ-117.130-003A1",
+    "expected_output": "System correctly performs: Assess severity and probability of hazard occurrence"
+  },
+  {
+    "test_case_id": "TC-009",
+    "requirement_id": "REQ-117.130-003B",
+    "description": "Verify that consider effects on safety of finished food",
+    "input_data": "Sample input data for REQ-117.130-003B",
+    "expected_output": "System correctly performs: Consider effects on safety of finished food"
+  },
+  {
+    "test_case_id": "TC-010",
+    "requirement_id": "REQ-117.130-003B3",
+    "description": "Verify that raw materials and other ingredients",
+    "input_data": "Sample input data for REQ-117.130-003B3",
+    "expected_output": "System correctly performs: Raw materials and other ingredients"
+  }
+]
