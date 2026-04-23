@@ -1,6 +1,9 @@
 import json
 import re
 import sys
+import myLogger
+
+logObj = myLogger.giveMeLoggingObject()
 
 """
 Verification script for requirements and test cases.
@@ -31,32 +34,44 @@ for r in requirements:
     # Rule 1: Required fields
     for field in ["requirement_id", "description", "source"]:
         if field not in r:
-            failures.append(f"Missing field '{field}' in requirement: {r}")
+            msg = f"Missing field '{field}' in requirement: {r}"
+            failures.append(msg)
+            logObj.error(msg)
 
     # Rule 2: ID format (e.g. REQ-117.130-001A, REQ-117.130-003A1, REQ-117.130-003B10)
     if rid and not re.match(r"REQ-\d+\.\d+-\d{3}[A-Z]\d*$", rid):
-        failures.append(f"Invalid requirement_id format: {rid}")
+        msg = f"Invalid requirement_id format: {rid}"
+        failures.append(msg)
+        logObj.error(msg)
 
     # Rule 4: No vague phrase
     if "description" in r and "all hazards" in r["description"].lower():
-        failures.append(f"Vague description in requirement: {rid}")
+        msg = f"Vague description in requirement: {rid}"
+        failures.append(msg)
+        logObj.error(msg)
 
     # Rule 5: Parent-child consistency
     if "parent" in r and rid and not rid.startswith(r["parent"]):
-        failures.append(f"Parent-child ID mismatch: {rid} (parent {r['parent']})")
+        msg = f"Parent-child ID mismatch: {rid} (parent {r['parent']})"
+        failures.append(msg)
+        logObj.error(msg)
 
 # Rule 3: Each test case must reference a known requirement (no orphan test cases)
 req_ids = {r["requirement_id"] for r in requirements}
 for t in test_cases:
     if t["requirement_id"] not in req_ids:
-        failures.append(f"Orphan test case {t['test_case_id']}: references unknown requirement {t['requirement_id']}")
+        msg = f"Orphan test case {t['test_case_id']}: references unknown requirement {t['requirement_id']}"
+        failures.append(msg)
+        logObj.warning(msg)
 
 # Output results
 if failures:
     print("Verification FAILED:")
     for f in failures:
         print("-", f)
+    logObj.error(f"Verification FAILED with {len(failures)} issue(s)")
     sys.exit(1)  # Exit with failure code for GitHub Actions
 else:
     print("Verification passed: all requirements meet structural rules.")
+    logObj.info(f"Verification passed: {len(requirements)} requirements, {len(test_cases)} test cases")
     sys.exit(0)

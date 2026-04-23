@@ -1,5 +1,8 @@
 import json
 import sys
+import myLogger
+
+logObj = myLogger.giveMeLoggingObject()
 
 # Load requirements and expected structure
 with open("requirements.json") as f:
@@ -19,6 +22,7 @@ for parent, suffixes in expected_structure.items():
         rid = f"{parent}{s}"
         if rid not in actual_ids:
             failures.append(f"Missing requirement: {rid}")
+            logObj.warning(f"Missing requirement: {rid}")
 
 # Optional: check for extra/unexpected requirements
 for rid in actual_ids:
@@ -32,6 +36,8 @@ for rid in actual_ids:
 
 if failures:
     print("\n".join(failures))
+    logObj.error(f"Validation FAILED with {len(failures)} issue(s)")
     sys.exit(1)
 else:
     print(" Validation passed: all enumerations complete.")
+    logObj.info(f"Validation passed: {len(requirements)} requirements checked")
