@@ -3,27 +3,30 @@ import argparse
 
 # ---------- Arguments ----------
 parser = argparse.ArgumentParser(description="Generate minimal test cases")
-parser.add_argument("--input", "-i", required=True, help="Input requirements.json")
+parser.add_argument("--requirements", "-r", required=True, help="Input requirements.json")
+parser.add_argument("--selection", "-s", required=True, help="Input selected rules file (json)")
 parser.add_argument("--output", "-o", required=True, help="Output test_cases.json")
 args = parser.parse_args()
 
 # ---------- Load requirements ----------
-with open(args.input, "r", encoding="utf-8") as f:
+with open(args.requirements, "r", encoding="utf-8") as f:
     requirements = json.load(f)
 
-# ---------- Select 10 rules ----------
-selected_requirements = [
-    "REQ-117.130-001A",
-    "REQ-117.130-001B",
-    "REQ-117.130-001E",
-    "REQ-117.130-001F",
-    "REQ-117.130-002A",
-    "REQ-117.130-002B",
-    "REQ-117.130-003A",
-    "REQ-117.130-003A1",
-    "REQ-117.130-003B",
-    "REQ-117.130-003B3"
-]
+# ---------- Load selected rules ----------
+with open(args.selection, "r", encoding="utf-8") as f:
+    selection_data = json.load(f)
+
+selected_requirements = set()
+
+# Case 1: selection file is a list of requirement IDs
+if isinstance(selection_data, list):
+    selected_requirements = set(selection_data)
+
+# Case 2: selection file is expected_structure.json (dict)
+elif isinstance(selection_data, dict):
+    for parent, children in selection_data.items():
+        for child in children:
+            selected_requirements.add(parent + child)
 
 # ---------- Generate test cases ----------
 test_cases = []
